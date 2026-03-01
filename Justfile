@@ -8,7 +8,7 @@ python-install:
 
 [group('data')]
 data-download:
-    echo "download raw data"
+    bash data/download.sh
 
 [group('data')]
 data-preprocess:

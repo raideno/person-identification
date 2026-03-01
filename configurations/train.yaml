@@ -1,2 +1,3 @@
 defaults:
   - dataset: detection
+  - model: detection

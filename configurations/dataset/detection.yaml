@@ -1,2 +1,2 @@
-_target_: src.datasets.detection.DetectionDataset
+_target_: src.datasets.detection.DetectionDataModule
 path: ./data/output

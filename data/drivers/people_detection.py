@@ -1,7 +1,6 @@
 import csv
 import json
-
-import path
+import pathlib
 
 from index import AbstractDriver, BoundingBox, Detection, FrameAnnotation
 
@@ -20,8 +19,8 @@ class PeopleDetectionDriver(AbstractDriver):
             dataset_path: Path to the root people_detection dataset folder
             output_path: Path to output directory for processed data
         """
-        self.dataset_path = path.Path(dataset_path)
-        self.output_path = path.Path(output_path)
+        self.dataset_path = pathlib.Path(dataset_path)
+        self.output_path = pathlib.Path(output_path)
         self.dataset_name = "people-detection"
 
     def process(self, **kwargs) -> None:
@@ -41,7 +40,7 @@ class PeopleDetectionDriver(AbstractDriver):
             sequence_counter = self._process_split(split_path, split, sequence_counter)
 
     def _process_split(
-        self, split_path: path.Path, split_name: str, sequence_counter: int
+        self, split_path: pathlib.Path, split_name: str, sequence_counter: int
     ) -> int:
         """Process a single dataset split (train/valid/test).
 
@@ -91,7 +90,7 @@ class PeopleDetectionDriver(AbstractDriver):
 
     def _process_image(
         self,
-        split_path: path.Path,
+        split_path: pathlib.Path,
         filename: str,
         anno_data: dict,
         split_name: str,
@@ -128,8 +127,8 @@ class PeopleDetectionDriver(AbstractDriver):
         ]
 
         annotation = FrameAnnotation(
-            frame_id=frame_id,
-            sequence_id=sequence_id,
+            frame_id=str(frame_id),
+            sequence_id=str(sequence_id),
             dataset=self.dataset_name,
             image_width=anno_data["width"],
             image_height=anno_data["height"],

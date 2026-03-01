@@ -17,9 +17,24 @@ def train(configuration: omegaconf.DictConfig):
                 ),
             )
         ),
+        batch_size=4,
+        num_workers=4,
+        train_split=0.8,
+        val_split=0.1,
+        augmentations=None,
     )
 
-    print("[#dataset]:", len(dataset))
+    dataset.setup()
+
+    model = hydra.utils.instantiate(configuration.model)
+
+    train_dataloader = dataset.train_dataloader()
+    val_dataloader = dataset.val_dataloader()
+    test_dataloader = dataset.test_dataloader()
+
+    output = model.forward(next(iter(train_dataloader)))
+
+    print("[output]:", output)
 
 
 if __name__ == "__main__":
